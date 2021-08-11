@@ -1,39 +1,53 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import robo from './robo.svg'
+import './App.css'
 
 class App extends Component {
-state = {
-    data: null
-  };
+  state = {
+    data: null,
+  }
 
   componentDidMount() {
     this.callBackendAPI()
-      .then(res => this.setState({ data: res.express }))
-      .catch(err => console.log(err));
+      .then((res) => this.setState({ data: res }))
+      .catch((err) => console.log(err))
   }
-    // fetching the GET route from the Express server which matches the GET route from server.js
+  // fetching the GET route from the Express server which matches the GET route from server.js
   callBackendAPI = async () => {
-    const response = await fetch('/express_backend');
-    const body = await response.json();
+    const response = await fetch('/get_joke')
+    const body = await response.json()
 
     if (response.status !== 200) {
-      throw Error(body.message) 
+      throw Error(body.message)
     }
-    return body;
-  };
+    return console.log(body.joke)
+  }
 
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
+        <div className="card text-center">
+          <div className="card-header">Drift Presents:</div>
+          <img src={robo} className="bot-img card-img-top" alt="..." />
+          <div className="card-body">
+            <h5 className="card-title">The Joke Bot</h5>
+            
+            <p className="card-text">
+              Beep. Boop. Click To Activate Laughter Protocol
+            </p>
+            
+            <a href="#" name="yes-btn" value="yes" className="drift-open-chat btn btn-info">
+              Activate
+            </a>
+            
+            
+          </div>
+          <div className="card-footer text-muted">A Dynamic Custom Bot</div>
+        </div>
         <p className="App-intro">{this.state.data}</p>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
