@@ -5,6 +5,7 @@ import './App.css'
 class App extends Component {
   state = {
     data: null,
+    joke: ""
   }
 
   componentDidMount() {
@@ -20,8 +21,13 @@ class App extends Component {
     if (response.status !== 200) {
       throw Error(body.message)
     }
-    return console.log(body.joke)
+    this.setState({
+      joke: body.joke
+    })
+    return console.log(this.state.joke)
   }
+
+  
 
   render() {
     return (

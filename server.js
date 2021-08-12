@@ -27,13 +27,13 @@ app.get('/get_joke', (req, res) => { //Line 9
   })
 }); //Line 11
 
-app.post("/", function (req, res){
-  // api_helper.make_API_call('https://icanhazdadjoke.com/')
-  // .then(response => {
-  //     console.log(response)
-  //     res.json(response)
-  // })
-  // .catch(error => {
-  //     res.send(error)
-  // })
+app.post("/send_message", function (req, res){
+  api_helper.make_API_call('https://driftapi.com/conversations/3241042197/messages')
+  .then(response => {
+      console.log(response)
+      res.json(response)
+  })
+  .catch(error => {
+      res.send(error)
+  })
 })

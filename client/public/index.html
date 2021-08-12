@@ -91,16 +91,17 @@
           .querySelector(".drift-open-chat")
           .addEventListener("click", function () {
             drift.api.startInteraction({ interactionId: 288761 }); // <-- Your interactionId goes here
+
+            window.drift.on("conversation:buttonClicked", function (data) {
+              console.log(
+                "user clicked a button with text: " + data.buttonBody
+              );
+              if (data.buttonBody === "Sure") {
+                console.log(this.state.joke)
+              }
+            });
+
           });
-        window.drift.on("conversation:buttonClicked", function (data) {
-          console.log("user clicked a button with text: " + data.buttonBody);
-          if (data.buttonBody === "Sure") {
-            // drift.api.startInteraction({
-            //   interactionId: 288761,
-            // });
-            console.log("Clicked")
-          }
-        });
       });
     </script>
     <!-- End of Async Drift Code -->
